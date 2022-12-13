@@ -1,0 +1,130 @@
+﻿@model MessageViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section scripts {
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+   
+
+        function submitStudent() {
+            var data = $("#messageForm").serialize();
+                   
+            $.ajax({
+                type: 'POST',
+                url: '/Contact/Index',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: data,
+                success: function (result) {
+
+                    $("#valName").text("");
+                    $("#valEmail").text("");
+                    $("#valMessage").text("");
+                    $("#valPhone").text("");
+
+
+                    swal("Başarılı ", "Mesajını başarılı bir şekilde gönderilmişir.", "success");
+                    console.log(result);
+                    console.log('success ');
+
+                },
+                error: function (e) {
+
+                    swal("Başarısız ", "Bir hata oluştu. Lütfen gerekli alanları doldurunuz.", "error");
+
+                    if(e.responseJSON.name==null)
+                    {
+                        $("#valName").text("Bu alan boş geçilemez");
+                    }
+                    if (e.responseJSON.email == null) {
+                        $("#valEmail").text("Bu alan boş geçilemez");
+                    }
+                    if (e.responseJSON.message == null) {
+                        $("#valMessage").text("Bu alan boş geçilemez");
+                    }
+
+                    if (e.responseJSON.phone == null) {
+                        $("#valPhone").text("Bu alan boş geçilemez");
+                    }
+
+
+                    console.log('Failed ');
+                    console.log(e);
+                }
+            })
+        }
+       
+
+
+    </script>
+}
+
+
+
+
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('/templates/cleanBlog/assets/img/contact-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Bize Ulaşın</h1>
+                        <span class="subheading">Sorularım var? Cevaplarım var.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>İletişime geçmek ister misiniz? Bana mesaj göndermek için aşağıdaki formu doldurun, en kısa sürede size geri döneceğim!</p>
+                <div class="my-5">
+
+                        <form id="messageForm" novalidate>
+                        <div class="form-floating">
+                            <input class="form-control" asp-for="Name"  id="name" type="text" placeholder="Adınızı Giriniz" />
+
+                            <label for="name">İsim</label>
+                              <span asp-validation-for="Name" id="valName" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-floating">
+                                <input class="form-control" asp-for="Email"  id="email" type="email" placeholder="E-Posta Adresini Giriniz..." />
+                            <label for="email">E-Posta</label>
+                                <span asp-validation-for="Email" id="valEmail" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-floating">
+                                <input class="form-control" asp-for="Phone" id="phone"  type="tel" placeholder="Telefon Numaranızı Giriniz..." />
+                            <label for="phone">Telefon</label>
+                                <span asp-validation-for="Phone" id="valPhone" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-floating">
+                                <textarea class="form-control"  asp-for="Messages" id="message" placeholder="Mesajınızı Giriniz..." style="height: 12rem"></textarea>
+                                <span asp-validation-for="Messages" id="valMessage" class="text-danger"></span>
+                            <label for="message">Mesaj</label>
+
+                        </div>
+                        <br />
+
+
+                        <!-- Submit Button-->
+                            <button type="button" class="btn btn-primary" onclick="submitStudent()">Gönder</button>
+                        </form>
+                        <br />
+                        <p  id="result"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+

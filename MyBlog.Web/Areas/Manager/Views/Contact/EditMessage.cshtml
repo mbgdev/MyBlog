@@ -1,0 +1,73 @@
+﻿@model Message
+@{
+    ViewData["Title"] = "EditMessage";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Mesaj Düzenleme</h1>
+<script src="~/ckeditor5/build/ckeditor.js"></script>
+
+
+<form asp-area="Manager" asp-controller="Contact" asp-action="EditMessage" enctype="multipart/form-data" method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <br />
+ 
+    <input type="hidden" asp-for="CreatedDate" />
+    <input type="hidden" asp-for="Id" />
+ 
+
+
+
+
+    <div class="form-group">
+        <label class="control-label">İsim</label>
+        <input  name="Name" asp-for="Name" class="form-control" disa />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="control-label">E-Posta</label>
+        <input name="Email" asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="control-label">Telefon</label>
+        <input name="Phone" asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="control-label">Başlık</label>
+        <textarea rows="3" name="Messages" asp-for="Messages" id="editor" class="form-control"></textarea>
+        <span asp-validation-for="Messages" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <label class="control-label">Durum</label>
+        <input type="checkbox" asp-for="Status" class="form-check-input" />
+        <label>Aktif</label>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <input type="submit" value="Gönder" class="btn btn-primary" />
+    </div>
+
+
+</form>
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>

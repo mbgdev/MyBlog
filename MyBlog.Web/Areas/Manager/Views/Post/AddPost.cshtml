@@ -1,0 +1,51 @@
+﻿@model AddPostViewModel
+@{
+    ViewData["Title"] = "Ekleme";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Yeni Yazı Ekleme</h1>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+<form asp-area="Manager" asp-controller="Post" asp-action="AddPost" enctype="multipart/form-data" method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <br />
+
+
+
+
+    <div class="form-group">
+
+        <label class="control-label">Resim</label>
+        <input class="form-control" type="file" name="userPicture" />
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label">Başlık</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+     <div class="form-group">
+        <label class="control-label">Başlık</label>
+        <textarea rows="3" asp-for="Content" name="content" id="editor" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Gönder" class="btn btn-primary" />
+    </div>
+
+
+</form>
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>

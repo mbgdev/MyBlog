@@ -1,0 +1,91 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image/x-icon" href="templates/cleanBlog/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/templates/cleanBlog/css/styles.css" rel="stylesheet" />
+     
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <link href="~/css/adminlayout.css" rel="stylesheet" />
+  
+
+</head>
+
+<body style="background-color:#e0e1e2">
+
+    <div class="sidenav">
+      <vc:member-component></vc:member-component>
+        <br />
+
+        @if (User.IsInRole("Admin") || User.IsInRole("Editör"))
+        {
+
+        
+        <a class="dropdown-btnl">
+           Rol İşlemleri<i style="margin-top:10px;" class="fa fa-caret-down mt-2"></i>
+        </a>
+        <div class="dropdown-container">
+
+            
+            <a asp-area="Manager" asp-controller="Admin" asp-action="Users"> Rol Atama  </a>
+            <a asp-area="Manager" asp-controller="Admin" asp-action="Roles"> Rol Listelme  </a>
+          
+
+        </div>
+       }
+
+
+
+
+        <a asp-area="Manager" asp-controller="Post" asp-action="Index">Tüm Yazılar</a>
+        <a asp-area="Manager" asp-controller="Post" asp-action="MyPost">Yazılarım</a>
+        <a asp-area="Manager" asp-controller="Contact" asp-action="Index">Mesajlar</a>
+        <a asp-area="" asp-controller="LogOut" asp-action="LogOut">Çıkış</a>
+        
+    </div>
+
+    <div class="main">
+
+    @RenderBody()
+    </div>
+    <!-- Footer-->
+
+
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="~/templates/cleanBlog/js/scripts.js"></script>
+    <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btnl");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

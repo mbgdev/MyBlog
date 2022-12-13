@@ -1,0 +1,33 @@
+﻿@model MemberComponentAppUserViewModel
+
+
+
+
+<a class="dropdown-btn">
+    <img width="50" height="50" class="rounded-circle"  src="@Model.ImageUrl" />
+    @Model.UserName<i style="margin-top:10px;" class="fa fa-caret-down"></i>
+</a>
+<div class="dropdown-container">
+    <a asp-area="Manager" asp-controller="Member" asp-action="Index"> Bilgilerim  </a>
+    <a asp-area="Manager" asp-controller="Member" asp-action="EditMember"> Bilgi Güncelleme  </a>
+    <a asp-area="Manager" asp-controller="Member" asp-action="PasswordChange">Şifre Yenileme</a>
+    
+</div>
+
+<script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
+</script>

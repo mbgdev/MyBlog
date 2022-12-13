@@ -1,0 +1,18 @@
+﻿
+input[type="datetime-local"] {
+    width: 93%;
+    color: #fff;
+    outline: none;
+    font-size: 0.9em;
+    line-height: 25px;
+    padding: 8px 16px;
+    border: 1px solid rgba(242,186,46,1);
+    letter-spacing: 1px;
+    -webkit-ca margin-bottom: 1.8em;
+    background: transparent;
+    font-family: 'Cuprum', sans-serif;
+}
+
+::-webkit-calendar-picker-indicator {
+    background-color: rgba(242,186,46,1);
+}

@@ -1,0 +1,105 @@
+﻿@model List<ListPostViewModel>
+@{
+    ViewData["Title"] = "Postlar";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+<br />
+
+<a asp-area="Manager" asp-controller="Post" asp-action="AddPost" class="btn btn-primary mb-5">Yeni Yazı Ekle</a>
+<div class="table-responsive-sm">
+<table class="table table-light table-striped table-bordered">
+
+    <tr>
+            <th>#</th>
+        <th>Yazar</th>
+        <th>Başlık</th>
+        <th>İçerik</th>
+        <th>Oluşturulma Tarihi</th>
+        <th>Son Düzenleme Tarihi</th>
+            <th>Durum</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+                <td>
+                    @{
+                        count++;
+                    }
+                    @count
+                </td>
+            <td>@item.AppUser.Name @item.AppUser.Surname</td>
+            <td>@item.Title</td>
+            @if(item.Content.Length>30)
+            {
+                    <td>@Html.Raw(item.Content.Substring(0,31))...</td>
+
+            }
+            else
+            {
+                    <td>@Html.Raw(item.Content)</td>
+
+            }
+            <td>@item.CreatedDate.ToShortDateString()</td>
+                <td>@item.ModifiedDate.ToShortDateString()</td>
+            <td>@item.Status</td>
+        <td>
+
+                    <div class="row">
+                        <div class="col-lg-6 text-left">
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#myModal-@count">
+                                Sil
+                            </button>
+
+                            <a class="btn btn-sm btn-success" asp-area="Manager" asp-controller="Post" asp-action="EditPost" asp-route-id="@item.Id">Düzenle</a>
+                        </div>
+
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal-@count">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.Title</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <strong>@item.Title</strong>  yazısını silmek istediğinizden emin misiniz?
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <form class="btn btn-sm btn-danger" asp-area="Manager" asp-controller="Post" asp-action="DeletePost" asp-route-id="@item.Id" method="post">
+                                            <button type="submit" class="btn btn-danger">Sil</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+        
+
+
+
+                    </div>
+
+               
+            </td>
+
+        </tr>
+        
+    }
+
+
+</table>
+</div>

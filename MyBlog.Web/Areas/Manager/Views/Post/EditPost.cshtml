@@ -1,0 +1,67 @@
+﻿@model ListPostViewModel
+@{
+    ViewData["Title"] = "Düzenleme";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Post Düzenleme</h1>
+<script src="~/ckeditor5/build/ckeditor.js"></script>
+
+
+<form asp-area="Manager" asp-controller="Post" asp-action="EditPost" enctype="multipart/form-data" method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <br />
+    <input  type="hidden" asp-for="AppUser"/>
+    <input  type="hidden" asp-for="AppUserId"/>
+    <input  type="hidden" asp-for="CreatedDate"/>
+    <input  type="hidden" asp-for="Id"/>
+    <input  type="hidden" asp-for="ImageUrl"/>
+
+
+    <div class="form-group">
+
+        <label class="control-label">Resim</label>
+        <input class="form-control" type="file" name="userPicture" />
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label">Başlık</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="control-label">Başlık</label>
+        <textarea rows="3" asp-for="Content" name="content" id="editor" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <label class="control-label">Durum</label>
+        <input type="checkbox"  asp-for="Status" class="form-check-input"/>
+        <label>Aktif</label>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <input type="submit" value="Gönder" class="btn btn-primary" />
+    </div>
+
+
+</form>
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>

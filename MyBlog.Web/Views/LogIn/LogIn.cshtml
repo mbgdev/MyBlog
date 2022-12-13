@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+@model LogInViewModel
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Üye Giriş Ekranı</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Classy Register Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+    <script type="application/x-javascript">
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Meta tag Keywords -->
+    <!-- css files -->
+    <link href="~/templates/cleanblog/css/styles.css" rel="stylesheet" />
+    <link href="~/templates/login/css/style.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <!-- //css files -->
+    <!-- online-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Cuprum:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+    <!--//online-fonts -->
+</head>
+<body>
+    <div class="header">
+        <h1>Üye GİRİŞ Formu</h1>
+    </div>
+    <div class="w3-main">
+
+        <div class="about-bottom main-agile book-form">
+           
+            <h2 class="tittle">GİRİŞ YAP</h2>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="LogIn" asp-controller="LogIn" method="post" class="mt-3">
+                <div class="form-date-w3-agileits">
+                    <div>
+                        <label> E-EPOSTA</label>
+                        <input type="email" asp-for="Email" placeholder="E-Posta Adresi Giriniz">
+                    </div>
+
+                    <span asp-validation-for="Email" class="text-danger mt-1"></span>
+
+                    <div class="mt-3">
+                        <label> ŞİFRE </label>
+                        <input type="password" asp-for="Password" placeholder="Şifrenizi Giriniz">
+                    </div>
+
+                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                    <div class="mt-3 row">
+                        <div class="col-lg-5">  <a class="text-white" asp-action="ForgotPassword" asp-controller="Password">Şifremi Unuttum !</a></div>
+                        <div class="col-lg-6  text-end ">  <a class="text-white text-center" asp-action="SignIn" asp-controller="SignIn">Üye Ol</a></div>
+
+                    </div>
+
+                </div>
+                <div class="make wow shake mt-3">
+                    <input type="submit" value="GİRİŞ YAP">
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
+

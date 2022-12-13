@@ -1,0 +1,64 @@
+﻿@model List<ListPostViewModel>
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('/templates/cleanBlog/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>MyBlog</h1>
+                    <span class="subheading">Yazılıma dair her bir blog</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            @foreach (var item in Model)
+            {
+                <!-- Post preview-->
+                <div class="post-preview">
+                    <a asp-controller="Home" asp-action="PostDetail" asp-route-id="@item.Encrypedid">
+                        <h2 class="post-title">@item.Title</h2>
+                        @if (item.Content.Length > 30)
+                        {
+                            <h3 class="post-subtitle">@Html.Raw(item.Content.Substring(0,31))...</h3>
+
+                        }
+                        else
+                        {
+                            <h3 class="post-subtitle">@Html.Raw(item.Content)</h3>
+
+                        }
+
+                    </a>
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#!">@item.AppUser.Name @item.AppUser.Surname</a>
+                        @item.CreatedDate.ToShortDateString()
+                    </p>
+                </div>
+
+
+
+            }
+            <!-- Divider-->
+            <hr class="my-4" />
+
+        </div>
+
+    </div>
+</div>
+
+

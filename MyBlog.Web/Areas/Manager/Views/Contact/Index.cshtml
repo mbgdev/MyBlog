@@ -1,0 +1,124 @@
+﻿@model List<Message>
+@{
+    ViewData["Title"] = "Mesajlar";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+    int count = 0;
+    string cls="";
+}
+
+
+
+<br />
+
+
+<div class="table-responsive-sm">
+    <table class="table table-light table-striped table-bordered">
+
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>E-posta</th>
+            <th>İçerik</th>
+            <th>Telefon</th>
+            <th>Oluşturulma Tarihi</th>
+            <th>Düzenleme Tarihi</th>
+            <th>Durum</th>
+            <th>İşlemler</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            @if(item.Status==false)
+            {
+                cls ="table-danger";
+            }
+            else{
+                cls = "";
+
+            }
+          
+                <tr class="@cls">
+            
+            
+                <td>
+                    @{
+                        count++;
+                    }
+                    @count
+                </td>
+                <td>@item.Name </td>
+                <td>@item.Email</td>
+                @if (item.Messages.Length >= 30)
+                {
+                    <td>@Html.Raw(item.Messages.Substring(0,31))...</td>
+
+                }
+                else
+                {
+                    <td>@Html.Raw(item.Messages)</td>
+
+                }
+                <td>@item.Phone</td>
+
+                <td>@item.CreatedDate</td>
+                <td>@item.ModifiedDate</td>
+
+
+                <td>@item.Status</td>
+                <td>
+
+                    <div class="row">
+                        <div class="col-lg-6 text-left">
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#myModal-@count">
+                                Sil
+                            </button>
+
+                            <a class="btn btn-sm btn-success" asp-area="Manager" asp-controller="Contact" asp-action="EditMessage" asp-route-id="@item.Id">Düzenle</a>
+                        </div>
+
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal-@count">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.Name</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <strong>@item.Name</strong>  adli kişinin mesajını silmek istediğinizden emin misiniz?
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <form class="btn btn-sm btn-danger" asp-area="Manager" asp-controller="Contact" asp-action="DeleteMessage" asp-route-id="@item.Id" method="post">
+                                            <button type="submit" class="btn btn-danger">Sil</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                </td>
+
+            </tr>
+
+        }
+
+
+    </table>
+</div>
