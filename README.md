@@ -15,9 +15,9 @@
 
 ## Architecture and Design Patterns
 - N-Tier Architecture
-- Repository Desing Patterns
-- Unit Of Work Desing Patterns
-- Model View Controller Desing Patterns
+- Repository Design Patterns
+- Unit Of Work Design Patterns
+- Model View Controller Design Patterns
 
 
 
